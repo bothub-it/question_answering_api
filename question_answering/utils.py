@@ -9,7 +9,9 @@ bothub_bucket = 'bothub_benchmark'
 
 
 def get_job_id(train_data, model_type, model_name, config_data):
-    return '{}_{}_{}_{}'.format(model_type, model_name, train_data.split('.')[0], config_data.split('.')[0])
+    if config_data is None:
+        return '{}_{}_{}_default_config'.format(model_type, model_name.replace('/', '_'), train_data.split('.')[0])
+    return '{}_{}_{}_{}'.format(model_type, model_name.replace('/', '_'), train_data.split('.')[0], config_data.split('.')[0])
 
 
 def upload_folder_to_bucket(bucket, local_path, bucket_path, recursive_upload=True):

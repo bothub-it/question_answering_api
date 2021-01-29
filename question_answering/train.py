@@ -44,9 +44,10 @@ def train():
     from simpletransformers.question_answering import QuestionAnsweringModel
 
     model = QuestionAnsweringModel(arguments.model_type, arguments.model_name, args=args, use_cuda=True)
-    model.train_model(train_data[:1000], eval_data=eval_data, output_dir=output_dir)
+    model.train_model(train_data, eval_data=eval_data)
 
-    upload_folder_to_bucket(bucket, output_dir, output_dir, recursive_upload=True)
+    upload_folder_to_bucket(bucket, 'outputs', output_dir, recursive_upload=True)
+    upload_folder_to_bucket(bucket, 'runs', output_dir, recursive_upload=True)
 
 
 if __name__ == '__main__':
