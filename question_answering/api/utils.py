@@ -1,4 +1,4 @@
-from . import settings
+import settings
 
 
 def get_model_info():

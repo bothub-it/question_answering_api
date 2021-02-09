@@ -4,13 +4,13 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask_cors import CORS
-from . import settings
-from .utils import get_model_info
-from .download_model import download_model
+from utils import get_model_info
+from download_model import download_model
 import json
 import time
 import os
 import plac
+import settings
 
 
 app = Flask(__name__)
@@ -18,7 +18,7 @@ model = None
 CORS(app)
 
 
-@app.route('/ask_question', methods=['POST'])
+@app.route('/ask', methods=['POST'])
 def ask_paper():
     if request.method == 'POST':
         json_string = request.get_json()
@@ -42,7 +42,7 @@ def ask_paper():
 def setup_model():
     global model
     st = time.time()
-    if os.path.isdir('new_folder'):
+    if os.path.isdir(settings.model):
         print('You dont have the model, downloading model...')
         plac.call(download_model, settings.model)
     print("Loading model...")

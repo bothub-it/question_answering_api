@@ -1,11 +1,8 @@
 import os
-import sys
 import logging
 import plac
-import requests
-import posixpath
 from google.cloud import storage
-from . import settings
+import settings
 
 logger = logging.getLogger(__name__)
 
@@ -73,9 +70,7 @@ def download_model(model):
 
 
 if __name__ == "__main__":
-    if sys.argv[1:]:
-        plac.call(download_model, sys.argv[1:])
-    elif settings.model:
+    if settings.model:
         plac.call(download_model, settings.model)
     else:
         print('no language selected, use --lang or set env var MODEL to your desired language')

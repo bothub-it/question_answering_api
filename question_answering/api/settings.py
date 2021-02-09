@@ -7,7 +7,7 @@ PARSER.add_argument("--model", type=str, default=None)
 
 ARGUMENTS, _ = PARSER.parse_known_args()
 
-model = ARGUMENTS.MODEL
+model = ARGUMENTS.model
 
 if model is None:
     model = config(
