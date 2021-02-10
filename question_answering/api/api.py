@@ -46,8 +46,8 @@ def setup_model():
         print('You dont have the model, downloading model...')
         plac.call(download_model, settings.model)
     print("Loading model...")
-    model_type, model_dir, train_args = get_model_info()
-    model = QuestionAnsweringModel(model_type, model_dir, args=train_args, use_cuda=True)
+    model_type, train_args = get_model_info()
+    model = QuestionAnsweringModel(model_type, settings.model, args=train_args, use_cuda=True)
     print('loaded in: ', time.time() - st)
 
 
