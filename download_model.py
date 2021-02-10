@@ -1,4 +1,5 @@
 from google.cloud import storage
+import google.oauth2.credentials
 from utils import model_info
 import os
 import logging
@@ -56,7 +57,16 @@ def download_folder_structure_from_bucket(bucket, local_path, bucket_path):
 
 
 def download_model(model):
-    storage_client = storage.Client()
+
+    credentials = google.oauth2.credentials.Credentials(
+        "access_token",
+        refresh_token=settings.BOTHUB_GOOGLE_CREDENTIALS_REFRESH_TOKEN,
+        token_uri=settings.BOTHUB_GOOGLE_CREDENTIALS_TOKEN_URI,
+        client_id=settings.BOTHUB_GOOGLE_CREDENTIALS_CLIENT_ID,
+        client_secret=settings.BOTHUB_GOOGLE_CREDENTIALS_CLIENT_SECRET,
+    )
+
+    storage_client = storage.Client(project=settings.BOTHUB_GOOGLE_PROJECT_ID, credentials=credentials)
     bucket = storage_client.get_bucket('question_answering')
 
     os.makedirs(model, exist_ok=True)
