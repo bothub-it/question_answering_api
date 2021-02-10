@@ -9,7 +9,6 @@ from download_model import download_model
 import json
 import time
 import os
-import plac
 import settings
 
 
@@ -34,7 +33,19 @@ def ask_paper():
         ]
 
         answer = model.predict(query)
-        answer_json = {'answer': answer[0]}
+
+        probability, answer = answer[1][0], answer[0][0]
+        answer = {
+            "answers": [
+                {
+                    "text": answer['answer'][i],
+                    "confidence": probability["probability"][i]
+                } for i in range(len(answer['answer']))
+            ],
+            "id": answer['id']
+        }
+
+        answer_json = answer
         response = jsonify(answer_json)
         return response
 
@@ -47,7 +58,12 @@ def setup_model():
         download_model(settings.model)
     print("Loading model...")
     model_dict = model_info.get(settings.model)
-    model = QuestionAnsweringModel(model_dict.get('type'), settings.model, args=model_dict.get('args'), use_cuda=True)
+    try:
+        model = QuestionAnsweringModel(model_dict.get('type'), settings.model, args=model_dict.get('args'),use_cuda=True)
+    except ValueError as err:
+        print(err)
+        model = QuestionAnsweringModel(model_dict.get('type'), settings.model, args=model_dict.get('args'),use_cuda=False)
+
     print('loaded in: ', time.time() - st)
 
 
