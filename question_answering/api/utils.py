@@ -48,5 +48,5 @@ def get_model_info():
         }
         model_type = 'bert'
 
-    return model_type, model_dir, train_args
+    return model_type, train_args
 
