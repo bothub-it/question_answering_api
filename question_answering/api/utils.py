@@ -1,9 +1,8 @@
 import settings
 
-
-def get_model_info():
-    if settings.model == 'pt_br':
-        train_args = {
+model_info = {
+    'pt_br': {
+        'args': {
             "num_train_epochs": 2,
             "max_seq_lenght": 384,
             "train_batch_size": 16,
@@ -15,10 +14,12 @@ def get_model_info():
             "evaluate_during_training": True,
             "evaluate_during_training_verbose": True,
             "use_cached_eval_features": True
-        }
-        model_type = 'bert'
-    elif settings.model == 'bert_multi':
-        train_args = {
+        },
+        'type': 'bert',
+        'bucket_path': 'bert_neuralmind_portuguese/model/checkpoint-14248-epoch-2'
+    },
+    'en': {
+        'args': {
             "num_train_epochs": 2,
             "max_seq_lenght": 384,
             "train_batch_size": 16,
@@ -30,10 +31,12 @@ def get_model_info():
             "evaluate_during_training": True,
             "evaluate_during_training_verbose": True,
             "use_cached_eval_features": True
-        }
-        model_type = 'bert'
-    elif settings.model == 'bert_multi2':
-        train_args = {
+        },
+        'type': 'bert',
+        'bucket_path': ''
+    },
+    'multilang': {
+        'args': {
             "num_train_epochs": 2,
             "max_seq_lenght": 384,
             "train_batch_size": 16,
@@ -45,8 +48,9 @@ def get_model_info():
             "evaluate_during_training": True,
             "evaluate_during_training_verbose": True,
             "use_cached_eval_features": True
-        }
-        model_type = 'bert'
-
-    return model_type, train_args
+        },
+        'type': 'bert',
+        'bucket_path': 'bert_bert-base-multilingual-cased_squad-2_batch_large/model/best_model'
+    },
+}
 

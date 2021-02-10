@@ -4,7 +4,7 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask_cors import CORS
-from utils import get_model_info
+from utils import model_info
 from download_model import download_model
 import json
 import time
@@ -42,12 +42,12 @@ def ask_paper():
 def setup_model():
     global model
     st = time.time()
-    if os.path.isdir(settings.model):
+    if not os.path.isdir(settings.model):
         print('You dont have the model, downloading model...')
-        plac.call(download_model, settings.model)
+        download_model(settings.model)
     print("Loading model...")
-    model_type, train_args = get_model_info()
-    model = QuestionAnsweringModel(model_type, settings.model, args=train_args, use_cuda=True)
+    model_dict = model_info.get(settings.model)
+    model = QuestionAnsweringModel(model_dict.get('type'), settings.model, args=model_dict.get('args'), use_cuda=True)
     print('loaded in: ', time.time() - st)
 
 

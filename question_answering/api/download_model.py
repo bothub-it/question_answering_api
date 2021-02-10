@@ -1,7 +1,8 @@
+from google.cloud import storage
+from utils import model_info
 import os
 import logging
 import plac
-from google.cloud import storage
 import settings
 
 logger = logging.getLogger(__name__)
@@ -56,16 +57,15 @@ def download_folder_structure_from_bucket(bucket, local_path, bucket_path):
 
 def download_model(model):
     storage_client = storage.Client()
-    bucket = storage_client.get_bucket('bothub_question_answering')
+    bucket = storage_client.get_bucket('question_answering')
 
-    model_dir = model
-    os.makedirs(model_dir, exist_ok=True)
+    os.makedirs(model, exist_ok=True)
 
     # model_url = model_download_url.get(model)
     # download_file(model_url, posixpath.join(model_dir, model_file_name))
 
     logger.info("downloading bert")
-    download_folder_structure_from_bucket(bucket, model_dir, model_dir)
+    download_folder_structure_from_bucket(bucket, model, model_info.get(settings.model).get('bucket_path'))
     logger.info("finished downloading bert")
 
 
