@@ -18,7 +18,7 @@ CORS(app)
 
 
 @app.route('/ask', methods=['POST'])
-def ask_paper():
+def ask_question():
     if request.method == 'POST':
         json_string = request.get_json()
         data_dump = json.dumps(json_string)
