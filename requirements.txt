@@ -7,3 +7,4 @@ flask==1.1.2
 flask_cors==3.0.10
 python-decouple==3.4
 django-environ==0.4.5
+redis==3.4.1

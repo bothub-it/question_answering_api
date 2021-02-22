@@ -1,5 +1,3 @@
-import settings
-
 model_info = {
     'pt_br': {
         'args': {
@@ -54,3 +52,14 @@ model_info = {
     },
 }
 
+language_to_model = {
+    'en': 'en',
+    'pt_br': 'pt_br',
+    'pt': 'pt_br',
+}
+
+model_dir = {
+    'en': 'en',
+    'pt_br': 'pt_br',
+    'multilang': 'multilang',
+}
