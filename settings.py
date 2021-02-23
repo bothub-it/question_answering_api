@@ -11,15 +11,12 @@ ARGUMENTS, _ = PARSER.parse_known_args()
 model = ARGUMENTS.model
 
 if model is None:
-    model = config(
-        "MODEL", cast=str, default="pt_br"
-    )
+    model = config("MODEL", cast=str, default="pt_br")
 
-environ.Env.read_env(env_file=(environ.Path(__file__)-1)(".env"))
+environ.Env.read_env(env_file=(environ.Path(__file__) - 1)(".env"))
 
 env = environ.Env(
     # set casting, default value
-
     # ENVIRONMENT=(str, "production"),
     # BOTHUB_NLP_API_HOST=(str, "0.0.0.0"),
     # BOTHUB_NLP_API_PORT=(int, 2657),
@@ -32,6 +29,7 @@ env = environ.Env(
     BOTHUB_GOOGLE_CREDENTIALS_TOKEN_URI=(str, None),
     BOTHUB_GOOGLE_CREDENTIALS_CLIENT_ID=(str, None),
     BOTHUB_GOOGLE_CREDENTIALS_CLIENT_SECRET=(str, None),
+    SQLALCHEMY_DATABASE_URI=(str, None),
 )
 
 # ENVIRONMENT = env.str("ENVIRONMENT")
@@ -52,3 +50,4 @@ BOTHUB_GOOGLE_CREDENTIALS_CLIENT_ID = env.str("BOTHUB_GOOGLE_CREDENTIALS_CLIENT_
 BOTHUB_GOOGLE_CREDENTIALS_CLIENT_SECRET = env.str(
     "BOTHUB_GOOGLE_CREDENTIALS_CLIENT_SECRET"
 )
+SQLALCHEMY_DATABASE_URI = env.str("SQLALCHEMY_DATABASE_URI")
