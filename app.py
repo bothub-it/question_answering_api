@@ -2,8 +2,6 @@
 from bothub_nlp_celery.app import celery_app
 from bothub_nlp_celery.tasks import TASK_NLU_QUESTION_ANSWERING
 
-import json
-
 model = celery_app.qa_model
 
 
@@ -31,5 +29,4 @@ def ask_question(context, question):
     }
 
     answer_json = answer
-    print(json.dumps(answer_json, indent=2))
     return answer_json

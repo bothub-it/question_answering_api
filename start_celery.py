@@ -6,8 +6,8 @@ subprocess.run(
     [
         "celery",
         "worker",
-        "--autoscale",
-        "1,1",
+        # "--autoscale",
+        # "1,1",
         "-O",
         "fair",
         "--workdir",
