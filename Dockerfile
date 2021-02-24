@@ -14,13 +14,13 @@ RUN apt-get update && \
 COPY . .
 RUN python3 -m pip install --upgrade pip
 RUN pip3 install -r requirements.txt
-RUN pip3 install torch
+RUN pip3 install torch torchvision
 #RUN pip3 install torch==1.7.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
 
-#ARG DOWNLOAD_MODEL
-#
-#RUN if [ ${DOWNLOAD_MODEL} ]; then \
-#        python3 download_model.py ${DOWNLOAD_MODEL}; \
-#    fi
+ARG DOWNLOAD_MODEL_URL
+
+RUN if [ ${DOWNLOAD_MODEL_URL} ]; then \
+        python3 download_model.py ${DOWNLOAD_MODEL_URL}; \
+    fi
 
 ENTRYPOINT ["python3", "api.py"]
