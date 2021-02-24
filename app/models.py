@@ -27,14 +27,15 @@ class AccessLog(db.Model):
 
     @classmethod
     def list_all(cls):
-        access_logs = cls.query.all()
+        access_logs_query = cls.query.order_by(AccessLog.created_on.desc()).all()
 
-        return [
+        access_logs = [
             {
                 "id": access_log.id,
                 "request_body": access_log.request_body,
                 "response_body": access_log.response_body,
-                "created_on": str(access_log.created_on),
-            }
-            for access_log in access_logs
+                "created_on": str(access_log.created_on)
+            } for access_log in access_logs_query
         ]
+
+        return {"count": len(access_logs), "access_log": access_logs}
