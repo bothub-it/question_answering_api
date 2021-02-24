@@ -1,0 +1,33 @@
+# Attention:
+# Use this docker-compose to:
+# - Up development environment: docker-compose up
+# - Build docker images: docker-compose build
+
+version: '3.7'
+
+services:
+  bothub-question-answering:
+    image: question-answering:latest
+    entrypoint: "python3 start_celery.py"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      tag: question-answering
+      args:
+        DOWNLOAD_MODEL_URL: <model_url>
+    depends_on:
+      - bothub-nlp-celery-redis
+    networks:
+      - default
+    environment:
+      - BOTHUB_NLP_CELERY_BROKER_URL=${BOTHUB_NLP_CELERY_BROKER_URL:-redis://bothub-nlp-celery-redis:6379/0}
+      - BOTHUB_NLP_CELERY_BACKEND_URL=${BOTHUB_NLP_CELERY_BACKEND_URL:-redis://bothub-nlp-celery-redis:6379/0}
+      - BOTHUB_ENGINE_URL=${BOTHUB_ENGINE_URL:-http://localhost}
+      - BOTHUB_NLP_LANGUAGE_QUEUE=${BOTHUB_NLP_LANGUAGE_QUEUE:-pt_br}
+      - BOTHUB_NLP_SERVICE_WORKER=${BOTHUB_NLP_SERVICE_WORKER:-true}
+      - BOTHUB_LANGUAGE_MODEL=${BOTHUB_LANGUAGE_MODEL:-QA}
+
+  bothub-nlp-celery-redis:
+    image: redis
+    ports:
+      - 6379:6379
