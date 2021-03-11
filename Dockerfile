@@ -14,7 +14,7 @@ RUN apt-get update && \
 COPY . .
 RUN python3 -m pip install --upgrade pip
 RUN pip3 install -r requirements.txt
-RUN pip3 install torch torchvision
+RUN pip3 install torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2
 #RUN pip3 install torch==1.7.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
 
 ARG DOWNLOAD_MODEL_URL
