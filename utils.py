@@ -15,7 +15,6 @@ model_info = {
             "use_cached_eval_features": True
         },
         'type': 'bert',
-        'bucket_path': 'bert_neuralmind_portuguese/model/checkpoint-14248-epoch-2',
         'dir': 'pt_br'
     },
     'en': {
@@ -34,7 +33,6 @@ model_info = {
             "use_cached_eval_features": True
         },
         'type': 'roberta',
-        'bucket_path': '',
         'dir': 'en'
     },
     'multilang': {
@@ -53,7 +51,6 @@ model_info = {
             "use_cached_eval_features": True
         },
         'type': 'bert',
-        'bucket_path': 'bert_bert-base-multilingual-cased_squad-2_batch_large/model/best_model',
         'dir': 'multilang'
     },
 }
