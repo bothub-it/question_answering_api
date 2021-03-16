@@ -18,15 +18,21 @@ def download_file(url, file_name):
     return file_name
 
 
-def download_model(model_url):
-    file_name = 'zipped_model.zip'
-    logger.info("downloading qa model . . .")
-    download_file(model_url, file_name)
-    logger.info("extracting qa model . . .")
-    with zipfile.ZipFile(file_name, 'r') as zip_ref:
-        zip_ref.extractall('.')
-    os.remove(file_name)
+def download_models(model_urls):
+    model_url = model_urls.split("|")
+    for url in model_url:
+        file_name = 'zipped_model.zip'
+        logger.info("downloading qa model . . .")
+        download_file(url, file_name)
+        logger.info("extracting qa model . . .")
+        with zipfile.ZipFile(file_name, 'r') as zip_ref:
+            zip_ref.extractall('.')
+        os.remove(file_name)
 
 
 if __name__ == "__main__":
-    plac.call(download_model, sys.argv[1:])
+    """
+    Downloads and extract one or more zipped models
+    argv : link1|link2|...
+    """
+    plac.call(download_models, sys.argv[1:])
