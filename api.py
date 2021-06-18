@@ -5,7 +5,7 @@ from flask import request
 from flask import jsonify
 from flask_cors import CORS
 from utils import model_info
-from download_model import download_model
+from download_model import download_models
 import json
 import time
 import os
@@ -53,9 +53,11 @@ def ask_question():
 def setup_model():
     global model
     st = time.time()
-    if not os.path.isdir(settings.model):
-        print('You dont have the model, downloading model...')
-        download_model(settings.model)
+    while not os.path.isdir(settings.model):
+        print('You dont have the model...')
+        model_url = input("Insert model url")
+        download_models(model_url)
+
     print("Loading model...")
     model_dict = model_info.get(settings.model)
     try:
