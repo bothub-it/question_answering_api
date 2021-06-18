@@ -1,8 +1,11 @@
 version: '3'
 services:
-  ngapi:
+  qaapi:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - DOWNLOAD_MODEL_URL=
     ports:
       - "5000:5000"
+    entrypoint: ["python3", "api.py", "--model", "pt_br"]
