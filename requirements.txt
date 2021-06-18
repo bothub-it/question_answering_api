@@ -1,7 +1,6 @@
 google-api-python-client==1.8.3
 google-cloud-storage==1.29.0
 simpletransformers==0.51.3
-celery==4.4.0
 plac==1.3.1
 flask==1.1.2
 flask_cors==3.0.10
