@@ -16,7 +16,7 @@ subprocess.run(
         "INFO",
         "-E",
         "--pool",
-        "gevent",
+        "solo",
         "-Q",
         'QA',
     ]
