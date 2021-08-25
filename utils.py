@@ -1,10 +1,12 @@
+import settings
+
 model_info = {
     'pt_br': {
         'args': {
             "n_best_size": 3,
             "num_train_epochs": 2,
-            "max_seq_length": 384,
-            "doc_stride": int(384*0.8),
+            "max_seq_length": settings.MAX_SEQ_LENGTH,
+            "doc_stride": int(settings.MAX_SEQ_LENGTH*0.8),
             "train_batch_size": 16,
             "gradient_accumulation_steps": 1,
             "eval_batch_size": 16,
@@ -22,8 +24,8 @@ model_info = {
         'args': {
             "n_best_size": 3,
             "num_train_epochs": 2,
-            "max_seq_length": 384,
-            "doc_stride": int(384*0.8),
+            "max_seq_length": settings.MAX_SEQ_LENGTH,
+            "doc_stride": int(settings.MAX_SEQ_LENGTH*0.8),
             "train_batch_size": 16,
             "gradient_accumulation_steps": 1,
             "eval_batch_size": 16,
@@ -41,8 +43,8 @@ model_info = {
         'args': {
             "n_best_size": 3,
             "num_train_epochs": 2,
-            "max_seq_length": 384,
-            "doc_stride": int(384*0.8),
+            "max_seq_length": settings.MAX_SEQ_LENGTH,
+            "doc_stride": int(settings.MAX_SEQ_LENGTH*0.8),
             "train_batch_size": 16,
             "gradient_accumulation_steps": 1,
             "eval_batch_size": 16,
