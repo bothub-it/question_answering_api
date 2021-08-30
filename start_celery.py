@@ -1,7 +1,7 @@
 import subprocess
-import settings
-from bothub_nlp_celery.actions import queue_name
-# from bothub_nlp_celery import settings
+from bothub_nlp_celery import settings
+
+QUEUES = ",".join([model + "-QA" for model in settings.AVAILABLE_QA_MODELS])
 
 subprocess.run(
     [
@@ -19,7 +19,7 @@ subprocess.run(
         "--pool",
         "solo",
         "-Q",
-        settings.LISTENING_QUEUES,
+        QUEUES,
     ]
 )
 
