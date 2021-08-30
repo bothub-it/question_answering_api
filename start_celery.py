@@ -22,5 +22,3 @@ subprocess.run(
         QUEUES,
     ]
 )
-
-#    "celery -A app worker -O fair -c 1 -l INFO -E --pool solo -Q QA"
