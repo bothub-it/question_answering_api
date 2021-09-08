@@ -1,8 +1,6 @@
 # coding=utf8
 from simpletransformers.question_answering import QuestionAnsweringModel
-from flask import Flask
-from flask import request
-from flask import jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from utils import model_info
 from download_model import download_models
@@ -53,18 +51,23 @@ def ask_question():
 def setup_model():
     global model
     st = time.time()
-    while not os.path.isdir(settings.model):
+    model_path = os.path.join(settings.MODEL_BASE_PATH, settings.MODEL_NAME, settings.MODEL_LANGUAGE)
+    while not os.path.isdir(model_path):
         print('You dont have the model...')
         model_url = input("Insert model url")
         download_models(model_url)
 
-    print("Loading model...")
-    model_dict = model_info.get(settings.model)
+    print(f"Loading {settings.MODEL_LANGUAGE} model...")
+    model_dict = model_info.get(settings.MODEL_LANGUAGE)
     try:
-        model = QuestionAnsweringModel(model_dict.get('type'), settings.model, args=model_dict.get('args'),use_cuda=True)
+        model = QuestionAnsweringModel(
+            model_dict.get('type'), model_path, args=model_dict.get('args'), use_cuda=True
+        )
     except ValueError as err:
         print(err)
-        model = QuestionAnsweringModel(model_dict.get('type'), settings.model, args=model_dict.get('args'),use_cuda=False)
+        model = QuestionAnsweringModel(
+            model_dict.get('type'), model_path, args=model_dict.get('args'), use_cuda=False
+        )
 
     print('loaded in: ', time.time() - st)
 
