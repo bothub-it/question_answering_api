@@ -12,7 +12,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      tag: question-answering
       args:
         DOWNLOAD_MODEL_URL: <model_url>
     depends_on:
@@ -23,8 +22,8 @@ services:
       - BOTHUB_NLP_CELERY_BROKER_URL=${BOTHUB_NLP_CELERY_BROKER_URL:-redis://bothub-nlp-celery-redis:6379/0}
       - BOTHUB_NLP_CELERY_BACKEND_URL=${BOTHUB_NLP_CELERY_BACKEND_URL:-redis://bothub-nlp-celery-redis:6379/0}
       - BOTHUB_ENGINE_URL=${BOTHUB_ENGINE_URL:-http://localhost}
-      - BOTHUB_NLP_LANGUAGE_QUEUE=${BOTHUB_NLP_LANGUAGE_QUEUE:-pt_br}
-      - BOTHUB_LANGUAGE_MODEL=${BOTHUB_LANGUAGE_MODEL:-QA}
+      - AVAILABLE_SPECIFIC_QA_QUEUES=${AVAILABLE_SPECIFIC_QA_QUEUES:-pt_br}
+      - AVAILABLE_QA_MODELS=${AVAILABLE_QA_MODELS:-pt_br}
 
   bothub-nlp-celery-redis:
     image: redis

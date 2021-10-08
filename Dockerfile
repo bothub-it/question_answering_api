@@ -1,8 +1,10 @@
 FROM nvidia/cuda:10.2-base-ubuntu18.04
-CMD nvidia-smi
 
 ENV WORKDIR /home/app
 WORKDIR ${WORKDIR}
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
 RUN apt-get update && \
     apt-get install -y \
