@@ -1,6 +1,5 @@
 import logging
 import plac
-import settings
 import os
 import requests
 import sys
