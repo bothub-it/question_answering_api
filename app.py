@@ -20,15 +20,14 @@ def ask_question(context, question, language):
     model = language_to_model.get(language, "multilang")
     answer = models.get(model).predict(query)
     probability, answer = answer[1][0], answer[0][0]
-    answer = {
+    formatted_answer = {
         "answers": [
             {
                 "text": answer['answer'][i],
-                "confidence": probability["probability"][i]
+                "confidence": "{:.8f}".format(probability["probability"][i])
             } for i in range(len(answer['answer']))
         ],
         "id": answer['id']
     }
 
-    answer_json = answer
-    return answer_json
+    return formatted_answer
