@@ -25,7 +25,7 @@ def ask_question(context, question, language):
             {
                 "text": answer['answer'][i],
                 "confidence": "{:.8f}".format(probability["probability"][i])
-            } for i in range(len(answer['answer']))
+            } for i in range(len(answer['answer'])) if answer['answer'][i] and answer['answer'][i] != 'empty'
         ],
         "id": answer['id']
     }
